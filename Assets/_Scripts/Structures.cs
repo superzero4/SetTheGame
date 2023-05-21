@@ -60,11 +60,6 @@ namespace Structures
             }
         }
     }
-    [Serializable]
-    public class Wrapper<T>
-    {
-        public T Value;
-    }
     public struct Result
     {
         public int nbOfShape;
