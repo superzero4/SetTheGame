@@ -55,7 +55,7 @@ public class Skin : ScriptableObject
         var skins = AssetDatabase.FindAssets("t:" + nameof(Skin))
             .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
             .Select(path => AssetDatabase.LoadAssetAtPath<Skin>(path));
-        return skins.FirstOrDefault(s=>s.name.Equals(BaseSkinFileName)) ?? skins.First();
+        return skins.FirstOrDefault(s => s.name.Equals(BaseSkinFileName)) ?? skins.First();
     }
 #endif
 }
