@@ -11,6 +11,17 @@ public class GameLogic : MonoBehaviour
     //Temporary, we'll probably use some 2D structures later
     [SerializeField] private List<Card> _cards;
     private IEnumerable<Card> Cards => _cards;
+    private void Update()
+    {
+        int i = 0;
+        foreach (var card in Cards)
+        {
+            card.gameObject.name="Card "+i++;
+            card.Data.Randomize();
+            if (FindSet(out Set set))
+                Debug.Log(set);
+        }
+    }
     private bool FindSet(out Set set)
     {
         set = null;
