@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5b5233805ab184fa4868e6c35f58ff, type: 3}
   m_Name: BaseSkin
   m_EditorClassIdentifier: 
-  _count: 
-  _colors: []
-  _materials: []
-  _sprites: []
+  _count: 010000000200000003000000
+  _colors:
+  - {r: 0, g: 0.14271069, b: 1, a: 1}
+  - {r: 0.29942417, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  _materials:
+  - {fileID: 2100000, guid: 8ef9418f83c3a63479b0b02cb5d3420a, type: 2}
+  - {fileID: 2100000, guid: 57e715a466aa14d4c9d2d718a8c418ba, type: 2}
+  - {fileID: 2100000, guid: 4dec9fd81a7a0ad40b4dc1568f53a4de, type: 2}
+  _sprites:
+  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: dd0deb03c5457144bb364f987f492ad9, type: 3}
+  - {fileID: 21300000, guid: f7b82f85cb03cbf4087a24069bd87119, type: 3}
