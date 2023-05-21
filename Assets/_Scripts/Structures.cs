@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Structures
@@ -10,7 +11,12 @@ namespace Structures
     public enum Colors { Color1 = 0, Color2 = 1, Color3 = 2 }
     public enum Fill { Empty = 0, Grid = 1, Full = 2 }
     public enum Shape { Square = 0, Rounded = 1, Mixed = 2 }
-
+    public static class EnumHelpers
+    {
+        public static int Count<T>() where T: Enum => ValuesArray<T>().Length;
+        public static IEnumerable<T> Values<T>() where T: Enum => ValuesArray<T>().Cast<T>();
+        public static Array ValuesArray<T>() where T : Enum => Enum.GetValues(typeof(T));
+    }
     public struct Result
     {
         public int nbOfShape;
