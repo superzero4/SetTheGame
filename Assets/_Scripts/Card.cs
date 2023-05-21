@@ -4,11 +4,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Card : MonoBehaviour
 {
     private const string ValidateCurrentSkinInvoke = "@" + nameof(Skin) + "." + nameof(Skin.ValidateSkin) + "(" + nameof(_skin) + ")";
-    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ValidateInput(nameof(ValidateSkinHelper), "Skin isn't valid, check the scriptable for detailed info"),InlineEditor] private Skin _skin;
+    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ValidateInput(nameof(ValidateSkinHelper), "Skin isn't valid, check the scriptable for detailed info"), InlineEditor] private Skin _skin;
     [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ShowIf(ValidateCurrentSkinInvoke)] private CardData _data;
     [SerializeField] private List<SpriteRenderer> _renderers;
     public bool UpdateSkin()
@@ -34,10 +33,9 @@ public class Card : MonoBehaviour
 #if UNITY_EDITOR
     private bool ValidateSkinHelper(Skin skin)
     {
-        _skin = skin;
-        if (_skin == null)
-            _skin = Skin.LoadDefaultSkin();
-        return Skin.ValidateSkin(_skin);
+        if (skin == null)
+            _skin = skin = Skin.LoadDefaultSkin();
+        return Skin.ValidateSkin(skin);
     }
 #endif
 }
