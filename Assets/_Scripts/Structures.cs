@@ -170,6 +170,10 @@ namespace Structures
             yield return fill;
             yield return shape;
         }
+        public override string ToString()
+        {
+            return "Data : "+string.Join(", ", this);
+        }
         public static implicit operator (Count, Colors, Fill, Shape)(CardData value)
         {
             return (value.count, value.color, value.fill, value.shape);

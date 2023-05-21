@@ -30,6 +30,10 @@ public class Card : MonoBehaviour
         }
         return true;
     }
+    public override string ToString()
+    {
+        return gameObject.name+" card has data : "+_data.ToString();
+    }
 #if UNITY_EDITOR
     private bool ValidateSkinHelper(Skin skin)
     {
