@@ -39,7 +39,7 @@ public class Card : MonoBehaviour
     }
     public override string ToString()
     {
-        return gameObject.name+" card has data : "+_data.ToString();
+        return gameObject.name + " card has data : " + _data.ToString();
     }
 #if UNITY_EDITOR
     private bool ValidateSkinHelper(Skin skin)
