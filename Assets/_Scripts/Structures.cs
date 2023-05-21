@@ -172,7 +172,12 @@ namespace Structures
         }
         public override string ToString()
         {
-            return "Data : "+string.Join(", ", this);
+            string result = "Data : ";
+            foreach (var item in this)
+            {
+                result+=item.ToString()+", ";
+            }
+            return result;
         }
         public static implicit operator (Count, Colors, Fill, Shape)(CardData value)
         {
