@@ -10,6 +10,9 @@ public class Card : MonoBehaviour
     [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ValidateInput(nameof(ValidateSkinHelper), "Skin isn't valid, check the scriptable for detailed info"), InlineEditor] private Skin _skin;
     [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ShowIf(ValidateCurrentSkinInvoke)] private CardData _data;
     [SerializeField] private List<SpriteRenderer> _renderers;
+
+    public CardData Data { get => _data;  }
+
     public bool UpdateSkin()
     {
         if (!Skin.ValidateSkin(_skin))
