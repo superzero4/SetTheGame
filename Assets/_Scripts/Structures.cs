@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Structures
 {
-    public enum DataType { Count = 0, Color = 1, Fill = 2, Shape = 3 }
+    public enum DataType { None = -1, Count = 0, Color = 1, Fill = 2, Shape = 3 }
     public enum Count { One = 0, Two = 1, Three = 2 }
     public enum Colors { Color1 = 0, Color2 = 1, Color3 = 2 }
     public enum Fill { Empty = 0, Grid = 1, Full = 2 }
