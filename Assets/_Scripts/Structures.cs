@@ -184,5 +184,52 @@ namespace Structures
             return new CardData(value.Item1, value.Item2, value.Item3, value.Item4);
         }
     }
+    internal class Set
+    {
+        public Card Item1;
+        public Card Item2;
+        public Card Item3;
+
+        public Set(Card item1, Card item2, Card item3)
+        {
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Set other &&
+                   EqualityComparer<Card>.Default.Equals(Item1, other.Item1) &&
+                   EqualityComparer<Card>.Default.Equals(Item2, other.Item2) &&
+                   EqualityComparer<Card>.Default.Equals(Item3, other.Item3);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Item1, Item2, Item3);
+        }
+
+        public void Deconstruct(out Card item1, out Card item2, out Card item3)
+        {
+            item1 = Item1;
+            item2 = Item2;
+            item3 = Item3;
+        }
+
+        public static implicit operator (Card, Card, Card)(Set value)
+        {
+            return (value.Item1, value.Item2, value.Item3);
+        }
+
+        public static implicit operator Set((Card, Card, Card) value)
+        {
+            return new Set(value.Item1, value.Item2, value.Item3);
+        }
+        public override string ToString()
+        {
+            return "Set : "+Item1.ToString()+", "+Item2.ToString()+", "+Item3.ToString();
+        }
+    }
 }
 
