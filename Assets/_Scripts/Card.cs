@@ -7,11 +7,14 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true)] private Skin _skin;
-    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true)] private CardData _data;
+    private const string ValidateCurrentSkinInvoke = "@" + nameof(Skin) + "." + nameof(Skin.ValidateSkin) + "(" + nameof(_skin) + ")";
+    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ValidateInput(nameof(ValidateSkinHelper), "Skin isn't valid, check the scriptable for detailed info"),InlineEditor] private Skin _skin;
+    [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ShowIf(ValidateCurrentSkinInvoke)] private CardData _data;
     [SerializeField] private List<SpriteRenderer> _renderers;
-    private void UpdateSkin()
+    public bool UpdateSkin()
     {
+        if (!Skin.ValidateSkin(_skin))
+            return false;
         var current = _skin[_data];
         int i = 0;
         for (; i < current.nbOfShape; i++)
@@ -26,5 +29,15 @@ public class Card : MonoBehaviour
         {
             _renderers[i].gameObject.SetActive(false);
         }
+        return true;
     }
+#if UNITY_EDITOR
+    private bool ValidateSkinHelper(Skin skin)
+    {
+        _skin = skin;
+        if (_skin == null)
+            _skin = Skin.LoadDefaultSkin();
+        return Skin.ValidateSkin(_skin);
+    }
+#endif
 }
