@@ -21,7 +21,7 @@ public class GameLogic : MonoBehaviour
             foreach (var card in Cards)
             {
                 card.gameObject.name = "Card " + i++;
-                card.Data.Randomize();
+                card.Randomize();
             }
             if (FindSet(out Set set))
                 Debug.Log(set);

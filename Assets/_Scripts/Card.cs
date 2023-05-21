@@ -11,8 +11,12 @@ public class Card : MonoBehaviour
     [SerializeField, OnValueChanged(nameof(UpdateSkin), IncludeChildren = true, InvokeOnInitialize = true, InvokeOnUndoRedo = true), ShowIf(ValidateCurrentSkinInvoke)] private CardData _data;
     [SerializeField] private List<SpriteRenderer> _renderers;
 
-    public CardData Data { get => _data;  }
-
+    public CardData Data { get => _data; }
+    public void Randomize()
+    {
+        _data.Randomize();
+        UpdateSkin();
+    }
     public bool UpdateSkin()
     {
         if (!Skin.ValidateSkin(_skin))
