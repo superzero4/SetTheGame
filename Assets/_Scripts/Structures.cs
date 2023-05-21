@@ -13,8 +13,8 @@ namespace Structures
     public enum Shape { Square = 0, Rounded = 1, Mixed = 2 }
     public static class EnumHelpers
     {
-        public static int Count<T>() where T: Enum => ValuesArray<T>().Length;
-        public static IEnumerable<T> Values<T>() where T: Enum => ValuesArray<T>().Cast<T>();
+        public static int Count<T>() where T : Enum => ValuesArray<T>().Length;
+        public static IEnumerable<T> Values<T>() where T : Enum => ValuesArray<T>().Cast<T>();
         public static Array ValuesArray<T>() where T : Enum => Enum.GetValues(typeof(T));
     }
     public struct Result
