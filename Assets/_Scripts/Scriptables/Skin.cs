@@ -3,6 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New skin", menuName = "Scriptables/Skin")]
@@ -41,4 +44,15 @@ public class Skin : ScriptableObject
             && _count.Count == EnumHelpers.Count<Count>();
     }
     public static bool ValidateSkin(Skin skin) => skin != null && skin.IsValid();
+#if UNITY_EDITOR
+
+    private const string BaseSkinFileName = "BaseSkin";
+    public static Skin LoadDefaultSkin()
+    {
+        var skins = AssetDatabase.FindAssets("t:" + nameof(Skin))
+            .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+            .Select(path => AssetDatabase.LoadAssetAtPath<Skin>(path));
+        return skins.FirstOrDefault(s=>s.name.Equals(BaseSkinFileName)) ?? skins.First();
+    }
+#endif
 }
