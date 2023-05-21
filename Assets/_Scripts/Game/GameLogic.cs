@@ -10,17 +10,24 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class GameLogic : MonoBehaviour
 {
     //Temporary, we'll probably use some 2D structures later
+    [SerializeField, Range(0, 10f)] private float _delay;
     [SerializeField] private List<Card> _cards;
     private IEnumerable<Card> Cards => _cards;
-    private void Update()
+    private IEnumerator Start()
     {
-        int i = 0;
-        foreach (var card in Cards)
+        while (true)
         {
-            card.gameObject.name="Card "+i++;
-            card.Data.Randomize();
+            int i = 0;
+            foreach (var card in Cards)
+            {
+                card.gameObject.name = "Card " + i++;
+                card.Data.Randomize();
+            }
             if (FindSet(out Set set))
                 Debug.Log(set);
+            else
+                Debug.LogWarning("No set founds");
+            yield return new WaitForSeconds(_delay);
         }
     }
     [Button(nameof(GetAllChilds))]
