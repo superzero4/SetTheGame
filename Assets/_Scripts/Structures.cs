@@ -17,6 +17,54 @@ namespace Structures
         public static IEnumerable<T> Values<T>() where T : Enum => ValuesArray<T>().Cast<T>();
         public static Array ValuesArray<T>() where T : Enum => Enum.GetValues(typeof(T));
     }
+    public static class Bindings
+    {
+        public static DataType ToDataType(Type t)
+        {
+            var sampleData = new CardData();
+            var sampleResult = new Result();
+            if (t == sampleData.count.GetType() || t == sampleResult.nbOfShape.GetType())
+            {
+                return DataType.Count;
+            }
+            else if (t == sampleData.color.GetType() || t == sampleResult.colorOfShapes.GetType())
+            {
+                return DataType.Color;
+            }
+            if (t == sampleData.fill.GetType() || t == sampleResult.materialOfShapes.GetType())
+            {
+                return DataType.Fill;
+            }
+            if (t == sampleData.shape.GetType() || t == sampleResult.shapeOfShapes.GetType())
+            {
+                return DataType.Shape;
+            }
+            return DataType.None;
+        }
+        public static (Type e, Type t) ToUsedTypes(DataType t)
+        {
+            var sampleData = new CardData();
+            var sampleResult = new Result();
+            switch (t)
+            {
+                case DataType.Count:
+                    return (sampleData.count.GetType(), sampleResult.nbOfShape.GetType());
+                case DataType.Color:
+                    return (sampleData.color.GetType(), sampleResult.colorOfShapes.GetType());
+                case DataType.Fill:
+                    return (sampleData.fill.GetType(), sampleResult.materialOfShapes.GetType());
+                case DataType.Shape:
+                    return (sampleData.shape.GetType(), sampleResult.shapeOfShapes.GetType());
+                default:
+                    return default;
+            }
+        }
+    }
+    [Serializable]
+    public class Wrapper<T>
+    {
+        public T Value;
+    }
     public struct Result
     {
         public int nbOfShape;
@@ -118,3 +166,4 @@ namespace Structures
         }
     }
 }
+
