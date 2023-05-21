@@ -19,7 +19,7 @@ namespace Structures
         public static T Random<T>() where T : Enum
         {
             var array = Values<T>().ToArray();
-            return array[UnityEngine.Random.Range(0,array.Length)];
+            return array[UnityEngine.Random.Range(0, array.Length)];
         }
     }
     public static class Bindings
@@ -233,7 +233,7 @@ namespace Structures
         }
         public override string ToString()
         {
-            return "Set : "+Item1.ToString()+", "+Item2.ToString()+", "+Item3.ToString();
+            return "Set : \n" + Item1.ToString() + "\n " + Item2.ToString() + "\n " + Item3.ToString();
         }
     }
 }
