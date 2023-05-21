@@ -44,10 +44,10 @@ public class GameLogic : MonoBehaviour
             {
                 foreach (var card3 in _cards.Where(c => c != card && card != card2))
                 {
-                    var counts = new int[] { card.Data.Count, card2.Data.Count, card2.Data.Count };
-                    var Fills = new int[] { card.Data.Fill, card2.Data.Fill, card2.Data.Fill };
-                    var Shapes = new int[] { card.Data.Shape, card2.Data.Shape, card2.Data.Shape };
-                    var Colors = new int[] { card.Data.Color, card2.Data.Color, card2.Data.Color };
+                    var counts = new int[] { card.Data.Count, card2.Data.Count, card3.Data.Count };
+                    var Fills = new int[] { card.Data.Fill, card2.Data.Fill, card3.Data.Fill };
+                    var Shapes = new int[] { card.Data.Shape, card2.Data.Shape, card3.Data.Shape };
+                    var Colors = new int[] { card.Data.Color, card2.Data.Color, card3.Data.Color };
                     if (ValidateSequence(counts, counts[0]) && ValidateSequence(Fills, Fills[0]) && ValidateSequence(Shapes, Shapes[0]) && ValidateSequence(Colors, Colors[0]))
                     {
                         set = (card, card2, card3);
