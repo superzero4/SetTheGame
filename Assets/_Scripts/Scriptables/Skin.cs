@@ -20,7 +20,7 @@ public class Skin : ScriptableObject
     [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Fill) + ">(" + nameof(_materials) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Fill) + ">(" + nameof(_materials) + ")")] private List<Material> _materials;
     [InfoBox("@" + nameof(EnumList) + "<" + nameof(Shape) + ">()")]
     [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Shape) + ">(" + nameof(_sprites) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Shape) + ">(" + nameof(_sprites) + ")")] private List<Sprite> _sprites;
-    public Result this[CardData indexer] => (indexer.Count, _colors[indexer.Color], _materials[indexer.Fill], _sprites[indexer.Shape]);
+    public Result this[CardData indexer] => (_count[indexer.Count], _colors[indexer.Color], _materials[indexer.Fill], _sprites[indexer.Shape]);
     public IList this[DataType t]
     {
         get
