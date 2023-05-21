@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using Structures;
 using System;
 using System.Collections;
@@ -22,6 +23,11 @@ public class GameLogic : MonoBehaviour
                 Debug.Log(set);
         }
     }
+    [Button(nameof(GetAllChilds))]
+    private void GetAllChilds()
+    {
+        _cards = GetComponentsInChildren<Card>().ToList();
+    }
     private bool FindSet(out Set set)
     {
         set = null;
@@ -45,6 +51,9 @@ public class GameLogic : MonoBehaviour
         }
         return false;
     }
+
+
+
     private bool ValidateSequence(IEnumerable<int> values, int oneElement)
     {
         return values.All(c => c == oneElement) || values.Distinct().Count() == EnumHelpers.Count<Count>();
