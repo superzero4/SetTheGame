@@ -32,4 +32,13 @@ public class Skin : ScriptableObject
             }
         }
     }
+
+    private bool IsValid()
+    {
+        return  _materials.Count == EnumHelpers.Count<Fill>()
+            && _colors.Count == EnumHelpers.Count<Colors>()
+            && _sprites.Count == EnumHelpers.Count<Shape>()
+            && _count.Count == EnumHelpers.Count<Count>();
+    }
+    public static bool ValidateSkin(Skin skin) => skin != null && skin.IsValid();
 }
