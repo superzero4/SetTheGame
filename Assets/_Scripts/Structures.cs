@@ -16,6 +16,11 @@ namespace Structures
         public static int Count<T>() where T : Enum => ValuesArray<T>().Length;
         public static IEnumerable<T> Values<T>() where T : Enum => ValuesArray<T>().Cast<T>();
         public static Array ValuesArray<T>() where T : Enum => Enum.GetValues(typeof(T));
+        public static T Random<T>() where T : Enum
+        {
+            var array = Values<T>().ToArray();
+            return array[UnityEngine.Random.Range(0,array.Length)];
+        }
     }
     public static class Bindings
     {
@@ -150,6 +155,13 @@ namespace Structures
             item4 = shape;
         }
 
+        internal void Randomize()
+        {
+            count = EnumHelpers.Random<Count>();
+            color = EnumHelpers.Random<Colors>();
+            fill = EnumHelpers.Random<Fill>();
+            shape = EnumHelpers.Random<Shape>();
+        }
 
         public IEnumerator GetEnumerator()
         {
