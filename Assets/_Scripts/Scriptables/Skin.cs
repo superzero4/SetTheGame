@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using Structures;
 using System;
 using System.Collections;
@@ -11,10 +12,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New skin", menuName = "Scriptables/Skin")]
 public class Skin : ScriptableObject
 {
-    [SerializeField] private List<int> _count;
-    [SerializeField] private List<Color> _colors;
-    [SerializeField] private List<Material> _materials;
-    [SerializeField] private List<Sprite> _sprites;
+    [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Count) + ">(" + nameof(_count) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Count) + ">(" + nameof(_count) + ")")] private List<int> _count;
+    [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Colors) + ">(" + nameof(_colors) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Colors) + ">(" + nameof(_colors) + ")")] private List<Color> _colors;
+    [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Fill) + ">(" + nameof(_materials) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Fill) + ">(" + nameof(_materials) + ")")] private List<Material> _materials;
+    [SerializeField, ValidateInput("@" + nameof(ListMatchesSize) + "<" + nameof(Shape) + ">(" + nameof(_sprites) + ")", "@" + nameof(ErrorMessage) + "<" + nameof(Shape) + ">(" + nameof(_sprites) + ")")] private List<Sprite> _sprites;
     public Result this[CardData indexer] => (indexer.Count, _colors[indexer.Color], _materials[indexer.Fill], _sprites[indexer.Shape]);
     public IList this[DataType t]
     {
@@ -38,11 +39,13 @@ public class Skin : ScriptableObject
 
     private bool IsValid()
     {
-        return  _materials.Count == EnumHelpers.Count<Fill>()
-            && _colors.Count == EnumHelpers.Count<Colors>()
-            && _sprites.Count == EnumHelpers.Count<Shape>()
-            && _count.Count == EnumHelpers.Count<Count>();
+        return ListMatchesSize<Fill>(_materials)
+            && ListMatchesSize<Colors>(_colors)
+            && ListMatchesSize<Shape>(_sprites)
+            && ListMatchesSize<Count>(_count);
     }
+    private bool ListMatchesSize<T>(IList list) where T : Enum => list.Count == EnumHelpers.Count<T>();
+    private string ErrorMessage<T>(IList list) where T : Enum => "There is " + list.Count + " instead of " + EnumHelpers.Count<T>() + " values";
     public static bool ValidateSkin(Skin skin) => skin != null && skin.IsValid();
 #if UNITY_EDITOR
 
