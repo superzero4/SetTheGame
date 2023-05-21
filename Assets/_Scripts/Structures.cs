@@ -109,7 +109,7 @@ namespace Structures
     }
 
     [Serializable]
-    public struct CardData
+    public struct CardData : IEnumerable
     {
         public Count count;
         public int Count => (int)count;
@@ -150,6 +150,14 @@ namespace Structures
             item4 = shape;
         }
 
+
+        public IEnumerator GetEnumerator()
+        {
+            yield return count;
+            yield return color;
+            yield return fill;
+            yield return shape;
+        }
         public static implicit operator (Count, Colors, Fill, Shape)(CardData value)
         {
             return (value.count, value.color, value.fill, value.shape);
