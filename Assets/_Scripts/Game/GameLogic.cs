@@ -29,7 +29,7 @@ public class GameLogic : MonoBehaviour
         {
             foreach (var card2 in _cards.Where(c => c != card))
             {
-                foreach (var card3 in _cards.Where(c => c != card && card != card2)
+                foreach (var card3 in _cards.Where(c => c != card && card != card2))
                 {
                     var counts = new int[] { card.Data.Count, card2.Data.Count, card2.Data.Count };
                     var Fills = new int[] { card.Data.Fill, card2.Data.Fill, card2.Data.Fill };
