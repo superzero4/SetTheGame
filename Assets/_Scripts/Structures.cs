@@ -65,6 +65,7 @@ namespace Structures
         }
     }
 
+    [Serializable]
     public struct CardData
     {
         public Count count;
