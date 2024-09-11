@@ -202,6 +202,18 @@ namespace Structures
             Item3 = item3;
         }
 
+        public void Highlight(Color color,bool alternateHighligh = false)
+        {
+            Item1.Highlight(color,-1f,alternateHighligh);
+            Item2.Highlight(color,-1f,alternateHighligh);
+            Item3.Highlight(color,-1f,alternateHighligh);
+        }
+        public void HideHighlight(bool alternativeHighlight = false)
+        {
+            Item1.HideHighlight(alternativeHighlight);
+            Item2.HideHighlight(alternativeHighlight);
+            Item3.HideHighlight(alternativeHighlight);
+        }
         public override bool Equals(object obj)
         {
             return obj is Set other &&
@@ -234,6 +246,12 @@ namespace Structures
         public override string ToString()
         {
             return "Set : \n" + Item1.ToString() + "\n " + Item2.ToString() + "\n " + Item3.ToString();
+        }
+
+        public Color GetHashColor()
+        {
+            return UnityEngine.Random.ColorHSV();
+            return new Color(Item1.GetHashCode(), Item2.GetHashCode(), Item3.GetHashCode());
         }
     }
 }

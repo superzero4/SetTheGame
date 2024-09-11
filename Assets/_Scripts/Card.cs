@@ -23,6 +23,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] private List<SpriteRenderer> _renderers;
     [SerializeField] private SpriteRenderer _highlightRenderer;
+    [SerializeField] private SpriteRenderer _alternativeHighlightRenderer;
 
     public CardData Data
     {
@@ -75,26 +76,27 @@ public class Card : MonoBehaviour
 #endif
     Coroutine _routine;
 
-    public void Highlight(Color highlightColor, float duration = 1f)
+    public void Highlight(Color highlightColor, float duration = 1f, bool alternativeHighlight = false)
     {
-        _highlightRenderer.color = highlightColor;
+        SpriteRenderer rd = alternativeHighlight ? _alternativeHighlightRenderer : _highlightRenderer;
+        rd.color = highlightColor;
         if (_routine != null)
             StopCoroutine(_routine);
-        _routine = StartCoroutine(HighlightRoutine(duration));
+        _routine = StartCoroutine(HighlightRoutine(rd,duration));
     }
 
-    private IEnumerator HighlightRoutine(float duration = 1f)
+    private IEnumerator HighlightRoutine(SpriteRenderer rd,float duration = 1f)
     {
-        _highlightRenderer.gameObject.SetActive(true);
+        rd.gameObject.SetActive(true);
         if (duration > 0f)
         {
             yield return new WaitForSeconds(duration);
-            _highlightRenderer.gameObject.SetActive(false);
+            rd.gameObject.SetActive(false);
         }
     }
 
-    public void HideHighlight()
+    public void HideHighlight(bool alternativeHighlight = false)
     {
-        _highlightRenderer.gameObject.SetActive(false);
+       (alternativeHighlight ? _alternativeHighlightRenderer :  _highlightRenderer).gameObject.SetActive(false);
     }
 }

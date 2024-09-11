@@ -1559,6 +1559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453177368}
   - component: {fileID: 1453177369}
+  - component: {fileID: 1453177370}
   m_Layer: 0
   m_Name: Cards
   m_TagString: Untagged
@@ -1605,7 +1606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a89d7ddef9bf54cbb7ab6084367a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 1
+  _sets: {fileID: 1453177370}
+  _delay: -1
+  _findSetDelay: 0.01
   _cards:
   - {fileID: 1905671693}
   - {fileID: 1581914026}
@@ -1619,6 +1622,19 @@ MonoBehaviour:
   - {fileID: 886684809}
   - {fileID: 1888038628}
   - {fileID: 1398636221}
+--- !u!114 &1453177370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453177367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b49126d064ee8a4aa6341bd0038491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 0.1
 --- !u!1001 &1581914024
 PrefabInstance:
   m_ObjectHideFlags: 0
